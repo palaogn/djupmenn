@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+  /* Modern Icelandic nature-inspired color palette */
+  --fjord-blue: #1e3a5f;
+  --deep-sea: #0f2537;
+  --ice-blue: #e0f2fe;
+  --moss-green: #3d4f35;
+  --stone-gray: #64748b;
+  --snow-white: #ffffff;
+  --charcoal: #0f172a;
+  --accent-blue: #38bdf8;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  color: var(--charcoal);
+  background-color: var(--snow-white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 4.5rem;
+}
+
+h2 {
+  font-size: 3.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3rem;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+  }
+}
