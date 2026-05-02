@@ -11,7 +11,7 @@ export default function App() {
     <div className="min-h-screen">
       <Navigation />
       <Hero />
-      <NewsSection />
+      {/* <NewsSection /> */}
       <AboutSection />
       <CabinSection />
       <JoinSection />

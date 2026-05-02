@@ -11,7 +11,7 @@ export function AboutSection() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="order-2 lg:order-1">
             <div className="inline-block px-4 py-2 rounded-full bg-[var(--fjord-blue)]/10 text-[var(--fjord-blue)] text-sm mb-6">
-              Síðan 1950
+              Síðan 1954
             </div>
             <h2 className="mb-8 text-[var(--fjord-blue)]">Um félagið</h2>
             <p className="text-xl mb-6 text-[var(--charcoal)] leading-relaxed">
@@ -23,30 +23,14 @@ export function AboutSection() {
               samverustundir. Félagið á og rekur einnig skála á Vestfjörðum sem
               meðlimir geta nýtt sér.
             </p>
-
-            <div className="grid grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-20 h-20 rounded-2xl bg-white shadow-lg flex items-center justify-center mb-4 mx-auto group hover:scale-110 transition-transform">
-                  <Users size={36} className="text-[var(--fjord-blue)]" />
-                </div>
-                <div className="text-4xl mb-2">200+</div>
-                <div className="text-sm text-[var(--stone-gray)]">Meðlimir</div>
-              </div>
-              <div className="text-center">
-                <div className="w-20 h-20 rounded-2xl bg-white shadow-lg flex items-center justify-center mb-4 mx-auto group hover:scale-110 transition-transform">
-                  <Heart size={36} className="text-[var(--fjord-blue)]" />
-                </div>
-                <div className="text-4xl mb-2">75+</div>
-                <div className="text-sm text-[var(--stone-gray)]">Ár</div>
-              </div>
-              <div className="text-center">
-                <div className="w-20 h-20 rounded-2xl bg-white shadow-lg flex items-center justify-center mb-4 mx-auto group hover:scale-110 transition-transform">
-                  <Mountain size={36} className="text-[var(--fjord-blue)]" />
-                </div>
-                <div className="text-4xl mb-2">1</div>
-                <div className="text-sm text-[var(--stone-gray)]">Skáli</div>
-              </div>
-            </div>
+            <p className="text-xl mb-6 text-[var(--charcoal)] leading-relaxed">
+              Félag Djúpmanna í Reykjavík, var stofnað þann 30 april 1954 og var
+              þá upphaflega hugsað sem vettvangur fyrir burtflutta Djúpmenn í
+              Reykjavík og nágrenni eins og nafnið gefur kannski til kynna. Í
+              dag er að mörgu leiti önnur staða uppi og viljum við gjarnan fá
+              alla þá í félagið sem eiga einhver tengsl við Djúpið óháð búsetu
+              en flestir skráðra félaga eru búsettir á höfuðborgarsvæðinu.
+            </p>
           </div>
 
           <div className="relative order-1 lg:order-2">
