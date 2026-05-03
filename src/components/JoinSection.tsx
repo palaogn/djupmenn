@@ -47,7 +47,7 @@ export function JoinSection() {
         <div className="text-center mb-16">
           <h2 className="mb-6 text-white">Gerast meðlimur</h2>
           <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
-            Komdu og vertu hluti af samfélagi Vestfirðinga. Árleg félagsgjöld eru 5.000 kr.
+            Komdu og vertu hluti af samfélagi Vestfirðinga. Árleg félagsgjöld eru 3.000 kr.
           </p>
         </div>
 
