@@ -6,7 +6,7 @@ type NavItem = { name: string; href: string };
 
 const navItems: NavItem[] = [
   { name: "Um okkur", href: "#about" },
-  { name: "Álfhóll", href: "#cabin" },
+  { name: "Álfhóll", href: "/alfholl" },
   { name: "Fróðleikur", href: "/frodleikur" },
   { name: "Gerast meðlimur", href: "#join" },
 ];

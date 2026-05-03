@@ -6,6 +6,7 @@ import { FrodleikurDetailPage } from "./pages/FrodleikurDetailPage";
 import { TenglarDetailPage } from "./pages/TenglarDetailPage";
 import { ArticleDetailPage } from "./pages/ArticleDetailPage";
 import { GalleryDetailPage } from "./pages/GalleryDetailPage";
+import { AlfhollPage } from "./pages/AlfhollPage";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <ScrollToTop />
       <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/alfholl" element={<AlfhollPage />} />
       <Route path="/frodleikur" element={<FrodleikurHubPage />} />
       <Route path="/frodleikur/efni/:slug" element={<FrodleikurDetailPage />} />
       <Route path="/frodleikur/tenglar/:slug" element={<TenglarDetailPage />} />

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { ArrowDown } from "lucide-react";
 
@@ -22,23 +23,23 @@ export function Hero() {
         <p className="text-xl md:text-2xl mb-12 text-gray-100 max-w-2xl mx-auto font-light">
           Samfélags- og menningarsamtök fólks frá Vestfjörðum
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
           <a
             href="#join"
-            className="group px-8 py-4 bg-white text-[var(--fjord-blue)] hover:bg-[var(--ice-blue)] transition-all rounded-full text-lg inline-flex items-center justify-center gap-2"
+            className="group px-6 sm:px-8 py-3 sm:py-4 bg-white text-[var(--fjord-blue)] hover:bg-[var(--ice-blue)] transition-all rounded-full text-base sm:text-lg inline-flex items-center justify-center gap-2"
           >
             Gerast meðlimur
             <ArrowDown
-              size={20}
+              size={18}
               className="group-hover:translate-y-1 transition-transform"
             />
           </a>
-          <a
-            href="#cabin"
-            className="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md transition-all rounded-full border border-white/30 text-lg"
+          <Link
+            to="/alfholl"
+            className="px-6 sm:px-8 py-3 sm:py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md transition-all rounded-full border border-white/30 text-base sm:text-lg inline-flex items-center justify-center gap-2"
           >
-            <span className="flex items-center gap-2">Um Álfhól</span>
-          </a>
+            Um Álfhól
+          </Link>
         </div>
       </div>
 
