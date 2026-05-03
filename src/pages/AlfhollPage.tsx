@@ -1,6 +1,9 @@
+import { useEffect, useRef } from "react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { LegacyPageLayout } from "../components/LegacyPageLayout";
 import { MapPin, Key, Trash2, Droplet, Info, CalendarCheck, Tag } from "lucide-react";
+
+const VIDEO_PLAYBACK_RATE = 1;
 
 const cabinRules = [
   {
@@ -24,6 +27,11 @@ const cabinRules = [
 ];
 
 export function AlfhollPage() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.playbackRate = VIDEO_PLAYBACK_RATE;
+  }, []);
+
   return (
     <LegacyPageLayout
       title="Álfhóll"
@@ -80,21 +88,20 @@ export function AlfhollPage() {
       </section>
 
       <section className="mb-24">
-        <h3 className="text-2xl mb-8 text-[var(--charcoal)]">Leiðin að skálanum</h3>
-        <div className="rounded-3xl overflow-hidden shadow-2xl">
-          <div className="relative pb-[56.25%] bg-gradient-to-br from-[var(--fjord-blue)] to-[var(--deep-sea)]">
-            <div className="absolute inset-0 flex items-center justify-center text-white">
-              <div className="text-center">
-                <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center mx-auto mb-6">
-                  <Info size={40} className="opacity-75" />
-                </div>
-                <p className="text-xl mb-2">Hlaða myndbandi hér</p>
-                <p className="text-sm opacity-75">
-                  Sýnir leiðina frá aðalveginum að skálanum
-                </p>
-              </div>
-            </div>
-          </div>
+        <h3 className="text-2xl mb-6 text-[var(--charcoal)]">Leiðin að skálanum</h3>
+        <p className="text-[var(--stone-gray)] mb-6">
+          Myndbandið sýnir leiðina frá aðalveginum að skálanum.
+        </p>
+        <div className="rounded-2xl overflow-hidden shadow-xl bg-black w-full max-w-[280px]">
+          <video
+            ref={videoRef}
+            src="/articles/alfholl-leid.mp4"
+            className="w-full h-auto block"
+            controls
+            muted
+            playsInline
+            preload="metadata"
+          />
         </div>
       </section>
 
