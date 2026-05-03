@@ -19,7 +19,7 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
-        <h1 className="mb-8 leading-tight">Djúpmannafélagið</h1>
+        <h1 className="mb-8 leading-tight">Félag Djúpmanna</h1>
         <p className="text-xl md:text-2xl mb-12 text-gray-100 max-w-2xl mx-auto font-light">
           Samfélags- og menningarsamtök fólks frá Vestfjörðum
         </p>
