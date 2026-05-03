@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { LegacyPageLayout } from "../components/LegacyPageLayout";
+import { PhotoGrid } from "../components/PhotoGrid";
 import {
   MapPin,
   Key,
@@ -25,6 +26,17 @@ const bringList = [
   "Salernispappír",
   "Þrifnaðartuskur",
 ];
+
+const interiorPhotos = [
+  "/alfholl/486974992_1102012055304421_7925751453748896810_n.jpg",
+  "/alfholl/487061967_1102012098637750_5682025423373632392_n.jpg",
+  "/alfholl/487096494_1102011868637773_6292140743205500313_n.jpg",
+  "/alfholl/487187825_1102012088637751_8403216032737513817_n.jpg",
+  "/alfholl/487281137_1102012085304418_2852149923783891800_n.jpg",
+  "/alfholl/487297152_1102012035304423_841404346204466277_n.jpg",
+  "/alfholl/487325903_1102012038637756_1404161118861181371_n.jpg",
+  "/alfholl/487762027_1102012071971086_4689298929775377673_n.jpg",
+].map((src) => ({ full: src, thumb: src }));
 
 const cleanupList = [
   "Sópa og þvo gólf",
@@ -68,6 +80,14 @@ export function AlfhollPage() {
           að drekka það. Aðeins fyrir meðlimi félagsins.
         </p>
       </div>
+
+      <section className="mb-20">
+        <h3 className="text-2xl mb-6 text-[var(--charcoal)]">Inni í Álfhóli</h3>
+        <PhotoGrid
+          photos={interiorPhotos}
+          className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 gap-2 sm:gap-3"
+        />
+      </section>
 
       <section className="mb-20 grid md:grid-cols-2 gap-6">
         <div className="bg-white border-2 border-[var(--ice-blue)] rounded-3xl p-8 shadow-sm">
