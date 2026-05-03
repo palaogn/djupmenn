@@ -1,29 +1,40 @@
 import { useEffect, useRef } from "react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { LegacyPageLayout } from "../components/LegacyPageLayout";
-import { MapPin, Key, Trash2, Droplet, Info, CalendarCheck, Tag } from "lucide-react";
+import {
+  MapPin,
+  Key,
+  Info,
+  CalendarCheck,
+  Tag,
+  Clock,
+  Package,
+  Flame,
+  Sparkles,
+  Droplet,
+} from "lucide-react";
 
 const VIDEO_PLAYBACK_RATE = 1;
 
-const cabinRules = [
-  {
-    icon: Trash2,
-    title: "Hreinlæti",
-    description:
-      "Vinsamlegast hafðu skálann hreinn þegar þú ferð. Þvoðu upp eftir þig og taktu rusl með þér.",
-  },
-  {
-    icon: Droplet,
-    title: "Vatn og rafmagn",
-    description:
-      "Notaðu vatn og rafmagn með skynsemi. Slökktu á öllu ljósi þegar þú ferð.",
-  },
-  {
-    icon: Key,
-    title: "Læsing",
-    description:
-      "Mundu að læsa vel þegar þú ferð. Lykilinn er afhendur meðlimum við upphaf hvers árs.",
-  },
+const bringList = [
+  "Sæng og kodda",
+  "Sængurver, koddaver og lak (rúmið er 150×200)",
+  "Sápur (uppþvotta- og handsápu)",
+  "Handklæði og viskastykki",
+  "Borðtuskur",
+  "Salernispappír",
+  "Þrifnaðartuskur",
+];
+
+const cleanupList = [
+  "Sópa og þvo gólf",
+  "Salerni",
+  "Vaska",
+  "Eldavél",
+  "Leirtau og eldhúsáhöld",
+  "Ganga frá rusli",
+  "Slá út rafmagninu",
+  "Þrífa ísskáp og skilja eftir rifu á honum",
 ];
 
 export function AlfhollPage() {
@@ -87,81 +98,177 @@ export function AlfhollPage() {
         </div>
       </section>
 
-      <section className="mb-24">
-        <h3 className="text-2xl mb-6 text-[var(--charcoal)]">Leiðin að skálanum</h3>
-        <p className="text-[var(--stone-gray)] mb-6">
-          Myndbandið sýnir leiðina frá aðalveginum að skálanum.
-        </p>
-        <div className="rounded-2xl overflow-hidden shadow-xl bg-black w-full max-w-[280px]">
-          <video
-            ref={videoRef}
-            src="/articles/alfholl-leid.mp4"
-            className="w-full h-auto block"
-            controls
-            muted
-            playsInline
-            preload="metadata"
-          />
+      <section className="mb-24 grid md:grid-cols-2 gap-10 items-start">
+        <div>
+          <h3 className="text-2xl mb-6 text-[var(--charcoal)]">Staðsetning</h3>
+          <div className="rounded-3xl overflow-hidden shadow-xl border border-[var(--ice-blue)]">
+            <iframe
+              src="https://www.google.com/maps?q=65.8488472,-22.6447361&hl=is&z=17&t=k&output=embed"
+              title="Álfhóll á Google Maps"
+              className="w-full h-[360px] block"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+          <a
+            href="https://www.google.com/maps/place/65%C2%B050'55.9%22N+22%C2%B038'41.1%22W/@65.8488607,-22.6456763,18.37z/data=!4m4!3m3!8m2!3d65.8488472!4d-22.6447361"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-4 text-[var(--fjord-blue)] hover:underline"
+          >
+            Opna í Google Maps
+            <MapPin size={16} />
+          </a>
+        </div>
+
+        <div>
+          <h3 className="text-2xl mb-6 text-[var(--charcoal)]">Leiðin að skálanum</h3>
+          <p className="text-[var(--stone-gray)] mb-6">
+            Myndbandið sýnir leiðina frá aðalveginum að skálanum.
+          </p>
+          <div className="rounded-2xl overflow-hidden shadow-xl bg-black w-full max-w-[280px]">
+            <video
+              ref={videoRef}
+              src="/articles/alfholl-leid.mp4"
+              className="w-full h-auto block"
+              controls
+              muted
+              playsInline
+              preload="metadata"
+            />
+          </div>
         </div>
       </section>
 
       <section className="mb-20">
-        <h3 className="text-2xl mb-10 text-[var(--charcoal)]">Reglur um notkun skálans</h3>
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {cabinRules.map((rule) => {
-            const Icon = rule.icon;
-            return (
-              <div
-                key={rule.title}
-                className="bg-gradient-to-br from-white to-[var(--ice-blue)] p-8 rounded-3xl shadow-lg"
-              >
-                <div className="w-14 h-14 rounded-2xl bg-[var(--fjord-blue)] flex items-center justify-center mb-5">
-                  <Icon size={28} className="text-white" />
-                </div>
-                <h4 className="mb-3 text-[var(--charcoal)] text-xl">{rule.title}</h4>
-                <p className="text-[var(--stone-gray)] leading-relaxed">
-                  {rule.description}
-                </p>
-              </div>
-            );
-          })}
+        <h3 className="text-2xl mb-10 text-[var(--charcoal)]">Húsreglur</h3>
+
+        <div className="grid md:grid-cols-2 gap-6 mb-6">
+          <div className="bg-gradient-to-br from-white to-[var(--ice-blue)] p-8 rounded-3xl shadow-lg">
+            <div className="w-14 h-14 rounded-2xl bg-[var(--fjord-blue)] flex items-center justify-center mb-5">
+              <Clock size={28} className="text-white" />
+            </div>
+            <h4 className="mb-3 text-[var(--charcoal)] text-xl">Komi og brottför</h4>
+            <ul className="space-y-2 text-[var(--stone-gray)] leading-relaxed">
+              <li>Komutími: kl. 16:00 á komudegi.</li>
+              <li>Brottför: í síðasta lagi kl. 14:00 á brottfarardegi.</li>
+            </ul>
+          </div>
+
+          <div className="bg-gradient-to-br from-white to-[var(--ice-blue)] p-8 rounded-3xl shadow-lg">
+            <div className="w-14 h-14 rounded-2xl bg-[var(--fjord-blue)] flex items-center justify-center mb-5">
+              <Key size={28} className="text-white" />
+            </div>
+            <h4 className="mb-3 text-[var(--charcoal)] text-xl">Lyklar og rafmagn</h4>
+            <p className="text-[var(--stone-gray)] leading-relaxed">
+              Leigutaki fær númer að lyklakassa með framvísun leigusamnings.
+              Rafmagnstaflan er fyrir ofan útidyrnar — slá þarf inn rafmagninu
+              og loka ísskápnum við komu.
+            </p>
+          </div>
         </div>
 
-        <div className="bg-white border-2 border-[var(--ice-blue)] rounded-3xl p-10 shadow-lg">
-          <h4 className="mb-6 text-[var(--charcoal)] flex items-center text-xl">
-            <Info size={24} className="mr-3 text-[var(--fjord-blue)]" />
-            Mikilvægt að vita
+        <div className="bg-white border-2 border-[var(--ice-blue)] rounded-3xl p-8 shadow-lg mb-6">
+          <h4 className="mb-2 text-[var(--charcoal)] flex items-center text-xl">
+            <Info size={22} className="mr-3 text-[var(--fjord-blue)]" />
+            Um húsið
           </h4>
-          <ul className="space-y-4 text-[var(--charcoal)] text-lg">
-            <li className="flex items-start">
-              <span className="text-[var(--fjord-blue)] mr-3">•</span>
-              <span>Bóka þarf skálann í gegnum bókunarkerfi félagsins</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-[var(--fjord-blue)] mr-3">•</span>
-              <span>Aðeins félagsmenn geta bókað í skálann</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-[var(--fjord-blue)] mr-3">•</span>
-              <span>
-                Aðeins er yfirborðsvatn í skálanum, sem ekki er mælt með að
-                drekka
-              </span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-[var(--fjord-blue)] mr-3">•</span>
-              <span>
-                Álfhóll er eign okkar allra og er haldið við í sjálfboðavinnu
-              </span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-[var(--fjord-blue)] mr-3">•</span>
-              <span>
-                Komum fram við hann af virðingu og ef það eru einhver vandamál
-                látið okkur vita
-              </span>
-            </li>
-          </ul>
+          <p className="text-[var(--stone-gray)] leading-relaxed">
+            Forstofa og stúdíóherbergi með góðu rúmi fyrir tvo (150×200) og
+            koju fyrir ofan sem rúmar tvo. Eldhúshorn með tveimur eldavélahellum,
+            ísskáp og vaski. Borðbúnaður fyrir 6. Salerni og handlaug.
+            Einungis er kalt vatn í húsinu enn sem komið er.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6 mb-6">
+          <div className="bg-white border-2 border-[var(--ice-blue)] rounded-3xl p-8 shadow-lg">
+            <h4 className="mb-4 text-[var(--charcoal)] flex items-center text-xl">
+              <Package size={22} className="mr-3 text-[var(--fjord-blue)]" />
+              Hvað þarf að koma með
+            </h4>
+            <ul className="space-y-2 text-[var(--charcoal)]">
+              {bringList.map((item) => (
+                <li key={item} className="flex items-start">
+                  <span className="text-[var(--fjord-blue)] mr-3">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="bg-white border-2 border-[var(--ice-blue)] rounded-3xl p-8 shadow-lg">
+            <h4 className="mb-4 text-[var(--charcoal)] flex items-center text-xl">
+              <Sparkles size={22} className="mr-3 text-[var(--fjord-blue)]" />
+              Frágangur við brottför
+            </h4>
+            <p className="text-[var(--stone-gray)] mb-4">
+              Ræsta skal húsið vandlega áður en farið er.
+            </p>
+            <ul className="space-y-2 text-[var(--charcoal)]">
+              {cleanupList.map((item) => (
+                <li key={item} className="flex items-start">
+                  <span className="text-[var(--fjord-blue)] mr-3">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="bg-amber-50 border-2 border-amber-200 rounded-3xl p-8 shadow-lg mb-6">
+          <h4 className="mb-3 text-[var(--charcoal)] flex items-center text-xl">
+            <Flame size={22} className="mr-3 text-amber-600" />
+            Eldvarnir — mikilvægt
+          </h4>
+          <p className="text-[var(--charcoal)] leading-relaxed">
+            Á svæðinu er mikil eldhætta. Gæta þarf fyllstu varúðar við
+            meðhöndlun elds, bæði kertaljósa og við grillun.{" "}
+            <strong>
+              Bannað er að nota einnota grill sem liggur á palli eða jörðu
+            </strong>{" "}
+            — mjög alvarlegir eldar hafa kviknað vegna þeirra.
+          </p>
+        </div>
+
+        <div className="bg-white border-2 border-[var(--ice-blue)] rounded-3xl p-8 shadow-lg mb-6">
+          <h4 className="mb-3 text-[var(--charcoal)] flex items-center text-xl">
+            <Droplet size={22} className="mr-3 text-[var(--fjord-blue)]" />
+            Vatn
+          </h4>
+          <p className="text-[var(--stone-gray)] leading-relaxed">
+            Vatnið er yfirborðsvatn — mælt er með því að sjóða neysluvatnið.
+          </p>
+        </div>
+
+        <div className="bg-[var(--fjord-blue)]/5 rounded-3xl p-8">
+          <p className="text-[var(--charcoal)] leading-relaxed text-lg">
+            Álfhóll er sameign okkar djúpmanna. Leigutaki ber ábyrgð á húsinu
+            og öllu sem þar er meðan á dvöl stendur. Verði um skemmdir að
+            ræða skal tilkynna umsjónarmanni það strax. Göngum vel um húsið og
+            umhverfið — gróður og allt — og skiljum við það eins og við viljum
+            sjálf taka við því.
+          </p>
+        </div>
+      </section>
+
+      <section className="mb-24">
+        <h3 className="text-2xl mb-6 text-[var(--charcoal)]">Taglið — göngustígur við Álfhól</h3>
+        <div className="grid md:grid-cols-2 gap-8 items-start">
+          <div className="rounded-3xl overflow-hidden shadow-xl">
+            <ImageWithFallback
+              src="/articles/taglid.jpg"
+              alt="Taglið göngustígur"
+              className="w-full h-auto block"
+            />
+          </div>
+          <p className="text-[var(--stone-gray)] leading-relaxed text-lg">
+            Við Álfhól hefur verið lagður göngustígur upp á Taglið á Bolafjalli.
+            Fylgjið rauðum stikum sem hafa verið lagðar, leiðin er um 800m.
+            Stígurinn býður upp á fallega leið og er
+            tilvalin leið fyrir stuttar gönguferðir í náttúrunni.
+          </p>
         </div>
       </section>
     </LegacyPageLayout>
