@@ -36,8 +36,8 @@ export function AboutSection() {
           <div className="relative order-1 lg:order-2">
             <div className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1622556956013-58110fa525e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpY2VsYW5kJTIwbW91bnRhaW5zJTIwc2VhfGVufDF8fHx8MTc2NzY0NjgyM3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Vestfirðir landscape"
+                src="/myndir/djupmyndir-agust-atlason/206837_10150155317449230_708829229_6881893_4879255_n.jpg"
+                alt="Ísafjarðardjúp"
                 className="w-full h-full object-cover"
               />
             </div>

@@ -1,0 +1,295 @@
+// One-off scraper for legacy djupmenn.is content.
+// Run: node scripts/scrape-legacy.mjs
+import { writeFile, mkdir } from "node:fs/promises";
+import { Buffer } from "node:buffer";
+import path from "node:path";
+
+const BASE = "https://djupmenn.is";
+const ROOT = path.resolve(new URL("..", import.meta.url).pathname);
+
+const ARTICLES = [
+  { id: 51, dateISO: "2014-10-27", slug: "bingo-bingo" },
+  { id: 50, dateISO: "2014-06-25", slug: "dagskra-djupmannamots-2014" },
+  { id: 46, dateISO: "2014-05-08", slug: "vorkaffi-2014" },
+  { id: 45, dateISO: "2014-03-27", slug: "adalfundur-2014" },
+  { id: 44, dateISO: "2013-07-23", slug: "stjornarfundur-2013-07-23" },
+  { id: 40, dateISO: "2013-05-26", slug: "adalfundur-2013" },
+  { id: 35, dateISO: "2013-04-16", slug: "adalfundur-og-vorkaffi-2013" },
+  { id: 19, dateISO: "2011-12-13", slug: "adalfundur-2011" },
+  { id: 18, dateISO: "2011-12-06", slug: "skraning-i-felag-djupmanna" },
+  { id: 41, dateISO: "2011-03-20", slug: "bjorkvold-bar-11" },
+  { id: 42, dateISO: "2010-10-29", slug: "adalfundur-2010" },
+  { id: 43, dateISO: "2010-10-26", slug: "djupmannatal-2010" },
+];
+
+const FRODLEIKUR = [
+  { id: 14, slug: "djupmannatal" },
+  { id: 16, slug: "isafjardardjup" },
+  { id: 20, slug: "land-felagsins-mjoafirdi" },
+  { id: 22, slug: "stjorn-felags-djupmanna" },
+  { id: 26, slug: "log-felags-djupmanna" },
+];
+
+const GALLERIES = [
+  { id: 1, slug: "djupmyndir-agust-atlason", title: "Djúpmyndir – Ágúst Atlason" },
+];
+
+const TENGLAR = [
+  { id: 11, slug: "fjolmidlar" },
+  { id: 23, slug: "vestfirsk-atthagafelog" },
+  { id: 24, slug: "ferdathjonusta-isafjardardjup" },
+];
+
+// Named HTML entity decoder (covers everything in Latin-1 + Icelandic).
+const NAMED = {
+  amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ",
+  iexcl: "¡", cent: "¢", pound: "£", curren: "¤", yen: "¥", brvbar: "¦", sect: "§",
+  uml: "¨", copy: "©", ordf: "ª", laquo: "«", not: "¬", shy: "­", reg: "®", macr: "¯",
+  deg: "°", plusmn: "±", sup2: "²", sup3: "³", acute: "´", micro: "µ", para: "¶", middot: "·",
+  cedil: "¸", sup1: "¹", ordm: "º", raquo: "»", frac14: "¼", frac12: "½", frac34: "¾", iquest: "¿",
+  Agrave: "À", Aacute: "Á", Acirc: "Â", Atilde: "Ã", Auml: "Ä", Aring: "Å", AElig: "Æ", Ccedil: "Ç",
+  Egrave: "È", Eacute: "É", Ecirc: "Ê", Euml: "Ë", Igrave: "Ì", Iacute: "Í", Icirc: "Î", Iuml: "Ï",
+  ETH: "Ð", Ntilde: "Ñ", Ograve: "Ò", Oacute: "Ó", Ocirc: "Ô", Otilde: "Õ", Ouml: "Ö", times: "×",
+  Oslash: "Ø", Ugrave: "Ù", Uacute: "Ú", Ucirc: "Û", Uuml: "Ü", Yacute: "Ý", THORN: "Þ", szlig: "ß",
+  agrave: "à", aacute: "á", acirc: "â", atilde: "ã", auml: "ä", aring: "å", aelig: "æ", ccedil: "ç",
+  egrave: "è", eacute: "é", ecirc: "ê", euml: "ë", igrave: "ì", iacute: "í", icirc: "î", iuml: "ï",
+  eth: "ð", ntilde: "ñ", ograve: "ò", oacute: "ó", ocirc: "ô", otilde: "õ", ouml: "ö", divide: "÷",
+  oslash: "ø", ugrave: "ù", uacute: "ú", ucirc: "û", uuml: "ü", yacute: "ý", thorn: "þ", yuml: "ÿ",
+  OElig: "Œ", oelig: "œ", Scaron: "Š", scaron: "š", Yuml: "Ÿ",
+  ndash: "–", mdash: "—", lsquo: "‘", rsquo: "’", sbquo: "‚", ldquo: "“", rdquo: "”", bdquo: "„",
+  hellip: "…", trade: "™", euro: "€",
+};
+
+function decode(html) {
+  return html
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(parseInt(d, 10)))
+    .replace(/&([a-zA-Z]+);/g, (m, n) => (NAMED[n] !== undefined ? NAMED[n] : m));
+}
+
+function stripTags(html) {
+  return html
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/(p|div|li|h[1-6])>/gi, "\n")
+    .replace(/<[^>]+>/g, "");
+}
+
+function extractStory(html) {
+  const start = html.indexOf('<div class="story">');
+  if (start < 0) return "";
+  // Walk forward, balancing <div> open/close to find the matching </div>.
+  const inner = start + '<div class="story">'.length;
+  let depth = 1;
+  const re = /<(\/?)div\b[^>]*>/gi;
+  re.lastIndex = inner;
+  let m;
+  while ((m = re.exec(html)) !== null) {
+    if (m[1] === "/") {
+      depth--;
+      if (depth === 0) return html.slice(inner, m.index);
+    } else {
+      depth++;
+    }
+  }
+  return html.slice(inner);
+}
+
+function extractHeading(html) {
+  const m = html.match(/<div class="heading">([^<]*)<\/div>/);
+  return m ? decode(m[1]).trim() : "";
+}
+
+function toParagraphs(rawHtml) {
+  const text = decode(stripTags(rawHtml));
+  return text
+    .split(/\n+/)
+    .map((s) => s.replace(/\s+/g, " ").trim())
+    .filter((s) => s.length > 0 && s !== "­");
+}
+
+async function fetchPage(query) {
+  const res = await fetch(`${BASE}/index.php?${query}`);
+  if (!res.ok) throw new Error(`${query}: ${res.status}`);
+  return await res.text();
+}
+
+async function fetchBinary(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`${url}: ${res.status}`);
+  return Buffer.from(await res.arrayBuffer());
+}
+
+function tsLiteral(value) {
+  return JSON.stringify(value, null, 2);
+}
+
+function tsHeader() {
+  return "// Auto-generated by scripts/scrape-legacy.mjs — do not edit by hand.\n\n";
+}
+
+async function scrapeArticles() {
+  const out = [];
+  for (const a of ARTICLES) {
+    const html = await fetchPage(`cat=news&page=${a.id}`);
+    const title = extractHeading(html);
+    const story = extractStory(html);
+    const paragraphs = toParagraphs(story);
+    let image;
+    if (a.id === 50) image = "/articles/mot-2014.jpg";
+    if (a.id === 44) image = "/articles/stjornarfundur-2013.jpg";
+    out.push({ id: a.id, slug: a.slug, title, dateISO: a.dateISO, paragraphs, image });
+    console.log(`article ${a.id}: ${title} (${paragraphs.length} paragraphs)`);
+  }
+  return out;
+}
+
+async function scrapeSimplePages(items, cat) {
+  const out = [];
+  for (const p of items) {
+    const html = await fetchPage(`cat=${cat}&page=${p.id}`);
+    const title = extractHeading(html);
+    const story = extractStory(html);
+    const paragraphs = toParagraphs(story);
+    out.push({ id: p.id, slug: p.slug, title, paragraphs });
+    console.log(`cat=${cat} ${p.id}: ${title} (${paragraphs.length} paragraphs)`);
+  }
+  return out;
+}
+
+async function scrapeLinkPages(items) {
+  const out = [];
+  for (const p of items) {
+    const html = await fetchPage(`cat=5&page=${p.id}`);
+    const title = extractHeading(html);
+    const story = extractStory(html);
+    const links = [];
+    const re = /<a\s+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi;
+    let m;
+    while ((m = re.exec(story)) !== null) {
+      const url = decode(m[1]).trim();
+      const label = decode(stripTags(m[2])).replace(/\s+/g, " ").trim();
+      if (!url || url.startsWith("#") || url.startsWith("javascript:")) continue;
+      if (!label) continue;
+      links.push({ label, url });
+    }
+    out.push({ id: p.id, slug: p.slug, title, links });
+    console.log(`tenglar ${p.id}: ${title} (${links.length} links)`);
+  }
+  return out;
+}
+
+async function scrapeGalleries() {
+  const out = [];
+  for (const g of GALLERIES) {
+    const html = await fetchPage(`cat=photos&gallery=${g.id}`);
+    const fullPaths = new Set();
+    const re = /href="(datab_myndir\/[^"]+\.(?:jpg|jpeg|JPG|JPEG|png))"/g;
+    let m;
+    while ((m = re.exec(html)) !== null) {
+      if (m[1].includes("/thumbs/")) continue;
+      if (/Sendinboxtoall/i.test(m[1])) continue;
+      fullPaths.add(m[1]);
+    }
+    const dir = path.join(ROOT, "public", "myndir", g.slug);
+    await mkdir(dir, { recursive: true });
+    const photos = [];
+    for (const fullPath of fullPaths) {
+      const filename = fullPath.split("/").pop();
+      const fullBuf = await fetchBinary(`${BASE}/${fullPath}`);
+      await writeFile(path.join(dir, filename), fullBuf);
+      const url = `/myndir/${g.slug}/${filename}`;
+      photos.push({ full: url, thumb: url });
+    }
+    out.push({ id: g.id, slug: g.slug, title: g.title, photos });
+    console.log(`gallery ${g.id} (${g.title}): ${photos.length} photos`);
+  }
+  return out;
+}
+
+async function downloadImages() {
+  const dir = path.join(ROOT, "public", "articles");
+  await mkdir(dir, { recursive: true });
+  await writeFile(path.join(dir, "mot-2014.jpg"), await fetchBinary(`${BASE}/userfiles/images/mot(1).jpg`));
+  await writeFile(path.join(dir, "stjornarfundur-2013.jpg"), await fetchBinary(`${BASE}/images/thumbs/mynd-698bdabb52c67b29c0228856d6f2aea3.jpg`));
+  console.log("downloaded images");
+}
+
+async function main() {
+  const articles = await scrapeArticles();
+  const frodleikur = await scrapeSimplePages(FRODLEIKUR, 6);
+  const tenglar = await scrapeLinkPages(TENGLAR);
+  const galleries = await scrapeGalleries();
+  await downloadImages();
+
+  const dataDir = path.join(ROOT, "src", "data");
+  await mkdir(dataDir, { recursive: true });
+
+  await writeFile(
+    path.join(dataDir, "articles.ts"),
+    tsHeader() +
+      `export type Article = {
+  id: number;
+  slug: string;
+  title: string;
+  dateISO: string;
+  paragraphs: string[];
+  image?: string;
+};
+
+export const articles: Article[] = ${tsLiteral(articles)};
+`
+  );
+
+  await writeFile(
+    path.join(dataDir, "frodleikur.ts"),
+    tsHeader() +
+      `export type FrodleikurEntry = {
+  id: number;
+  slug: string;
+  title: string;
+  paragraphs: string[];
+};
+
+export const frodleikur: FrodleikurEntry[] = ${tsLiteral(frodleikur)};
+`
+  );
+
+  await writeFile(
+    path.join(dataDir, "tenglar.ts"),
+    tsHeader() +
+      `export type TenglarLink = { label: string; url: string };
+
+export type TenglarEntry = {
+  id: number;
+  slug: string;
+  title: string;
+  links: TenglarLink[];
+};
+
+export const tenglar: TenglarEntry[] = ${tsLiteral(tenglar)};
+`
+  );
+
+  await writeFile(
+    path.join(dataDir, "galleries.ts"),
+    tsHeader() +
+      `export type GalleryPhoto = { thumb: string; full: string };
+
+export type Gallery = {
+  id: number;
+  slug: string;
+  title: string;
+  photos: GalleryPhoto[];
+};
+
+export const galleries: Gallery[] = ${tsLiteral(galleries)};
+`
+  );
+
+  console.log("wrote src/data/{articles,frodleikur,tenglar,galleries}.ts");
+}
+
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

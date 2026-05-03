@@ -36,7 +36,7 @@ export function CabinSection() {
         {/* Cabin Image */}
         <div className="mb-20 rounded-3xl overflow-hidden shadow-2xl">
           <ImageWithFallback
-            src="https://images.unsplash.com/photo-1565971988144-c8a2adc6eb1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b29kZW4lMjBjYWJpbiUyMGljZWxhbmR8ZW58MXx8fHwxNzY3NjQ2ODIzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            src="/articles/IMG_0420.jpg"
             alt="Skálinn"
             className="w-full h-[500px] object-cover"
           />
