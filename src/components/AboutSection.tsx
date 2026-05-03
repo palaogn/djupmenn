@@ -34,7 +34,7 @@ export function AboutSection() {
           </div>
 
           <div className="relative order-1 lg:order-2">
-            <div className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative h-[280px] sm:h-[400px] lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl">
               <ImageWithFallback
                 src="/myndir/djupmyndir-agust-atlason/206837_10150155317449230_708829229_6881893_4879255_n.jpg"
                 alt="Ísafjarðardjúp"

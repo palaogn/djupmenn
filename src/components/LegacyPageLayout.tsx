@@ -14,7 +14,9 @@ export function LegacyPageLayout({ title, intro, children }: LegacyPageLayoutPro
       <Navigation />
       <header className="pt-36 pb-14 px-6 lg:px-8 bg-gradient-to-b from-[var(--ice-blue)] to-white">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl lg:text-5xl text-[var(--fjord-blue)]">{title}</h1>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl text-[var(--fjord-blue)] break-words hyphens-auto" lang="is">
+            {title}
+          </h1>
           {intro && (
             <p className="mt-4 text-lg text-[var(--stone-gray)] leading-relaxed">{intro}</p>
           )}

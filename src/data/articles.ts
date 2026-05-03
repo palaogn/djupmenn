@@ -127,7 +127,6 @@ export const articles: Article[] = [
       "- Hugmynd kom inn um að safna inn afsláttum frá hinum ýmsu fyrirtækum tengdum og ótengdum djúpinu sem félagsmenn gætu síðan nýtt sér. Verður það þá gert fyrir næsta ár 2014.",
       "-Einnig kom inn hugmynd um að gefa út félagsskírteini fyrir þá félagsmenn sem hafa borgað sem þeir geta þá sýnt þegar þeir ætla að nýta sér afslættina."
     ],
-    "image": "/articles/stjornarfundur-2013.jpg"
   },
   {
     "id": 40,

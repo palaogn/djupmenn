@@ -11,7 +11,7 @@ export function CabinSection() {
             <ImageWithFallback
               src="/articles/IMG_0420.jpg"
               alt="Álfhóll"
-              className="w-full h-[480px] object-cover"
+              className="w-full h-[260px] sm:h-[360px] lg:h-[480px] object-cover"
             />
           </div>
 

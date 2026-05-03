@@ -118,21 +118,6 @@ export const frodleikur: FrodleikurEntry[] = [
     ]
   },
   {
-    "id": 22,
-    "slug": "stjorn-felags-djupmanna",
-    "title": "Stjórn Félags Djúpmanna",
-    "paragraphs": [
-      "Jórunn Silla Geirsdóttir frá Skálavík í Mjóafirði.",
-      "Daníel Helgason, gjaldkeri ættaður frá Odda í Ögurvík.",
-      "Einar Kjartansson, ættaður frá Strandseljum í Strandseljavík.",
-      "Halldór Jónsson, ættaður frá Laugarás í Skjaldfannadal.",
-      "Reynir Snædal, ættaður frá Hallstöðum á Langadalsströnd.",
-      "Í varastjórn sitja:",
-      "Jóna Sigríður Marvinsdóttir ættuð frá Skjaldfönn í Skjaldfannadal.",
-      "Guðrún (Gógó) Karlsdóttir ættuð frá Birnustöðum í Laugadal."
-    ]
-  },
-  {
     "id": 26,
     "slug": "log-felags-djupmanna",
     "title": "Lög Félags Djúpmanna",

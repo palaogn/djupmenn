@@ -39,7 +39,10 @@ function Card({ to, title, meta, description, image }: CardProps) {
       )}
       <div className="p-6 flex-1 flex flex-col">
         {meta && <p className="text-xs uppercase tracking-wide text-[var(--stone-gray)] mb-2">{meta}</p>}
-        <h3 className="text-lg text-[var(--fjord-blue)] leading-snug mb-3 line-clamp-2 min-h-[3.25rem]">
+        <h3
+          className="text-lg text-[var(--fjord-blue)] leading-snug mb-3 line-clamp-2 min-h-[3.25rem] break-words hyphens-auto"
+          lang="is"
+        >
           {title}
         </h3>
         <p className="text-sm text-[var(--charcoal)]/80 leading-relaxed line-clamp-3 flex-1">
