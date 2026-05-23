@@ -124,26 +124,6 @@ export function AlfhollPage() {
         </div>
       </section>
 
-      <section className="mb-24">
-        <div>
-          <h3 className="text-2xl mb-6 text-[var(--charcoal)]">Leiðin að skálanum</h3>
-          <p className="text-[var(--stone-gray)] mb-6">
-            Myndbandið sýnir leiðina frá aðalveginum að skálanum.
-          </p>
-          <div className="rounded-2xl overflow-hidden shadow-xl bg-black w-full max-w-[280px]">
-            <video
-              ref={videoRef}
-              src="/articles/alfholl-leid.mp4"
-              className="w-full h-auto block"
-              controls
-              muted
-              playsInline
-              preload="metadata"
-            />
-          </div>
-        </div>
-      </section>
-
       <section className="mb-20">
         <h3 className="text-2xl mb-10 text-[var(--charcoal)]">Húsreglur</h3>
 
@@ -282,6 +262,22 @@ export function AlfhollPage() {
             src="/alfholl/alfholl-map.png"
             alt="Kort af leiðinni að Álfhóli"
             className="w-full h-auto block"
+          />
+        </div>
+
+        <h3 className="text-2xl mt-10 mb-6 text-[var(--charcoal)]">Leiðin að skálanum</h3>
+        <p className="text-[var(--stone-gray)] mb-6">
+          Myndbandið sýnir leiðina frá aðalveginum að skálanum.
+        </p>
+        <div className="rounded-2xl overflow-hidden shadow-xl bg-black w-full max-w-[280px]">
+          <video
+            ref={videoRef}
+            src="/articles/alfholl-leid.mp4"
+            className="w-full h-auto block"
+            controls
+            muted
+            playsInline
+            preload="metadata"
           />
         </div>
       </section>
