@@ -17,7 +17,7 @@ export function JoinSection() {
           Komdu og vertu hluti af samfélagi Djúpmanna og hjálpaðu okkur að móta félagið.
         </p>
         <p className="text-lg text-white/80 leading-relaxed mb-12">
-          Árleg félagsgjöld eru 3.000 kr.
+          Árleg félagsgjöld eru 4.000 kr.
         </p>
 
         <a
