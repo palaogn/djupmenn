@@ -124,30 +124,7 @@ export function AlfhollPage() {
         </div>
       </section>
 
-      <section className="mb-24 grid md:grid-cols-2 gap-10 items-start">
-        <div>
-          <h3 className="text-2xl mb-6 text-[var(--charcoal)]">Staðsetning</h3>
-          <div className="rounded-3xl overflow-hidden shadow-xl border border-[var(--ice-blue)]">
-            <iframe
-              src="https://www.google.com/maps?q=65.8488472,-22.6447361&hl=is&z=17&t=k&output=embed"
-              title="Álfhóll á Google Maps"
-              className="w-full h-[360px] block"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-            />
-          </div>
-          <a
-            href="https://www.google.com/maps/place/65%C2%B050'55.9%22N+22%C2%B038'41.1%22W/@65.8488607,-22.6456763,18.37z/data=!4m4!3m3!8m2!3d65.8488472!4d-22.6447361"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mt-4 text-[var(--fjord-blue)] hover:underline"
-          >
-            Opna í Google Maps
-            <MapPin size={16} />
-          </a>
-        </div>
-
+      <section className="mb-24">
         <div>
           <h3 className="text-2xl mb-6 text-[var(--charcoal)]">Leiðin að skálanum</h3>
           <p className="text-[var(--stone-gray)] mb-6">
@@ -276,6 +253,36 @@ export function AlfhollPage() {
             umhverfið — gróður og allt — og skiljum við það eins og við viljum
             sjálf taka við því.
           </p>
+        </div>
+      </section>
+
+      <section className="mb-24">
+        <h3 className="text-2xl mb-6 text-[var(--charcoal)]">Staðsetning</h3>
+        <div className="rounded-3xl overflow-hidden shadow-xl border border-[var(--ice-blue)]">
+          <iframe
+            src="https://www.google.com/maps?q=65.8488472,-22.6447361&hl=is&z=17&t=k&output=embed"
+            title="Álfhóll á Google Maps"
+            className="w-full h-[360px] block"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+        </div>
+        <a
+          href="https://www.google.com/maps/place/65%C2%B050'55.9%22N+22%C2%B038'41.1%22W/@65.8488607,-22.6456763,18.37z/data=!4m4!3m3!8m2!3d65.8488472!4d-22.6447361"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 mt-4 text-[var(--fjord-blue)] hover:underline"
+        >
+          Opna í Google Maps
+          <MapPin size={16} />
+        </a>
+        <div className="mt-6 rounded-3xl overflow-hidden shadow-xl border border-[var(--ice-blue)]">
+          <ImageWithFallback
+            src="/alfholl/alfholl-map.png"
+            alt="Kort af leiðinni að Álfhóli"
+            className="w-full h-auto block"
+          />
         </div>
       </section>
 
