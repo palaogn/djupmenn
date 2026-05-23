@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { LegacyPageLayout } from "../components/LegacyPageLayout";
 import { PhotoGrid } from "../components/PhotoGrid";
@@ -13,6 +13,7 @@ import {
   Flame,
   Sparkles,
   Droplet,
+  X,
 } from "lucide-react";
 
 const VIDEO_PLAYBACK_RATE = 1;
@@ -50,9 +51,18 @@ const cleanupList = [
 
 export function AlfhollPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [mapOpen, setMapOpen] = useState(false);
   useEffect(() => {
     if (videoRef.current) videoRef.current.playbackRate = VIDEO_PLAYBACK_RATE;
   }, []);
+  useEffect(() => {
+    if (!mapOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMapOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [mapOpen]);
 
   return (
     <LegacyPageLayout
@@ -260,13 +270,18 @@ export function AlfhollPage() {
               <MapPin size={16} />
             </a>
           </div>
-          <div className="rounded-3xl overflow-hidden shadow-xl border border-[var(--ice-blue)]">
+          <button
+            type="button"
+            onClick={() => setMapOpen(true)}
+            className="rounded-3xl overflow-hidden shadow-xl border border-[var(--ice-blue)] cursor-zoom-in group block w-full"
+            aria-label="Stækka kort"
+          >
             <ImageWithFallback
               src="/alfholl/alfholl-map.png"
               alt="Kort af leiðinni að Álfhóli"
-              className="w-full h-auto block"
+              className="w-full h-auto block group-hover:scale-[1.02] transition-transform duration-300"
             />
-          </div>
+          </button>
         </div>
 
         <h3 className="text-2xl mt-10 mb-6 text-[var(--charcoal)]">Leiðin að skálanum</h3>
@@ -304,6 +319,30 @@ export function AlfhollPage() {
           </p>
         </div>
       </section>
+      {mapOpen && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setMapOpen(false)}
+        >
+          <button
+            type="button"
+            className="absolute top-4 right-4 text-white/80 hover:text-white"
+            onClick={(e) => {
+              e.stopPropagation();
+              setMapOpen(false);
+            }}
+            aria-label="Loka"
+          >
+            <X size={28} />
+          </button>
+          <img
+            src="/alfholl/alfholl-map.png"
+            alt="Kort af leiðinni að Álfhóli"
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </LegacyPageLayout>
   );
 }
