@@ -18,13 +18,12 @@ import {
 const VIDEO_PLAYBACK_RATE = 1;
 
 const bringList = [
-  "Sæng og kodda",
   "Sængurver, koddaver og lak (rúmið er 150×200)",
   "Sápur (uppþvotta- og handsápu)",
   "Handklæði og viskastykki",
   "Borðtuskur",
   "Salernispappír",
-  "Þrifnaðartuskur",
+  "Tuskur fyrir þrif",
 ];
 
 const interiorPhotos = [
@@ -46,7 +45,7 @@ const cleanupList = [
   "Leirtau og eldhúsáhöld",
   "Ganga frá rusli",
   "Slá út rafmagninu",
-  "Þrífa ísskáp og skilja eftir rifu á honum",
+  "Þrífa , slökkva og skilja eftir rifu á honum",
 ];
 
 export function AlfhollPage() {
@@ -96,7 +95,7 @@ export function AlfhollPage() {
             <h3 className="text-2xl text-[var(--charcoal)]">Verð</h3>
           </div>
           <p className="text-[var(--stone-gray)] leading-relaxed">
-            Verðskrá kemur fljótlega.
+            7.000 kr. fyrir eina nótt.
           </p>
         </div>
 
@@ -112,6 +111,13 @@ export function AlfhollPage() {
               className="text-[var(--fjord-blue)] underline"
             >
               unnag@simnet.is
+              </a>{" "}
+            eða í síma{" "}
+            <a
+              href="tel:+3548677623"
+              className="text-[var(--fjord-blue)] underline"
+            >
+              867-7623
             </a>
             .
           </p>
@@ -196,9 +202,9 @@ export function AlfhollPage() {
           </h4>
           <p className="text-[var(--stone-gray)] leading-relaxed">
             Forstofa og stúdíóherbergi með góðu rúmi fyrir tvo (150×200) og
-            koju fyrir ofan sem rúmar tvo. Eldhúshorn með tveimur eldavélahellum,
-            ísskáp og vaski. Borðbúnaður fyrir 6. Salerni og handlaug.
-            Einungis er kalt vatn í húsinu enn sem komið er.
+            koju fyrir ofan sem rúmar 2-2. Eldhúshorn með tveimur eldavélahellum,
+            ísskáp og vaski. Borðbúnaður fyrir 6. Salerni og handlaug. Í húsinu eru
+            4 sængur og 4 koddar. Einungis er kalt vatn í húsinu enn sem komið er.
           </p>
         </div>
 
