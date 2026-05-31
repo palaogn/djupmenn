@@ -46,7 +46,7 @@ const cleanupList = [
   "Leirtau og eldhúsáhöld",
   "Ganga frá rusli",
   "Slá út rafmagninu",
-  "Þrífa , slökkva og skilja eftir rifu á honum",
+  "Þrífa ísskáp , slökkva og skilja eftir rifu á honum",
 ];
 
 export function AlfhollPage() {
@@ -67,7 +67,7 @@ export function AlfhollPage() {
   return (
     <LegacyPageLayout
       title="Álfhóll"
-      intro="Skáli Djúpmannafélagsins í botni Mjóafjarðar á Vestfjörðum."
+      intro="Skáli Djúpmannafélagsins í botni Mjóafjarðar í Ísafjarðardjúpi."
     >
       <div className="rounded-3xl overflow-hidden shadow-2xl mb-16">
         <ImageWithFallback
@@ -78,15 +78,14 @@ export function AlfhollPage() {
       </div>
 
       <div className="bg-gradient-to-br from-[var(--ice-blue)] to-white rounded-3xl p-12 shadow-lg mb-20">
-        <div className="flex items-center justify-center text-[var(--fjord-blue)] mb-6">
-          <MapPin size={24} className="mr-3" />
-          <span className="text-lg">Mjóifjörður, Vestfirðir</span>
-        </div>
         <p className="text-xl text-center text-[var(--charcoal)] leading-relaxed">
-          Álfhóll er lítill kofi sem er dásamlegt að vera í. Það eru eitt tvöfalt
-          rúm og lítið háloft fyrir 2–3. Lítill eldhúskrókur er til staðar og
-          klósett. Vatn í kofann er yfirborðsvatn svo það er ekki mælt með því
-          að drekka það. Aðeins fyrir meðlimi félagsins.
+          Álfhóll er 15fm stúdíó skáli staðsettur á landi Djúpmanna í hjarta Mjóafjarðar með útsýni út fjörðinn.
+          Í skálanum er gert ráð fyrir að allt að fjórir fullorðnir geta gist. 
+          Í risi eru dýnur fyrir tvo og hjónarúm niðri. 
+          Það eru tvær hellur, ísskápur og rafmagn í skálanum og rennandi kalt vatn. 
+          Það er salerni en ekki sturta 
+          (stutt er í bændagistinguna í Heydal þar sem hægt er að komast í sund). 
+          Pallur er allan hringinn í kringum skálann þar sem kjörið er að njóta djúpsins.
         </p>
       </div>
 
@@ -105,7 +104,8 @@ export function AlfhollPage() {
             <h3 className="text-2xl text-[var(--charcoal)]">Verð</h3>
           </div>
           <p className="text-[var(--stone-gray)] leading-relaxed">
-            7.000 kr. fyrir eina nótt.
+            7.000 kr. fyrir eina nótt. <br/>
+            (Nýtist til að halda við kofanum)
           </p>
         </div>
 
@@ -124,10 +124,10 @@ export function AlfhollPage() {
               </a>{" "}
             eða í síma{" "}
             <a
-              href="tel:+3548677623"
+              href="tel:+3548987457"
               className="text-[var(--fjord-blue)] underline"
             >
-              867-7623
+              898-7457
             </a>
             .
           </p>
@@ -142,7 +142,7 @@ export function AlfhollPage() {
             <div className="w-14 h-14 rounded-2xl bg-[var(--fjord-blue)] flex items-center justify-center mb-5">
               <Clock size={28} className="text-white" />
             </div>
-            <h4 className="mb-3 text-[var(--charcoal)] text-xl">Komi og brottför</h4>
+            <h4 className="mb-3 text-[var(--charcoal)] text-xl">Koma og brottför</h4>
             <ul className="space-y-2 text-[var(--stone-gray)] leading-relaxed">
               <li>Komutími: kl. 16:00 á komudegi.</li>
               <li>Brottför: í síðasta lagi kl. 14:00 á brottfarardegi.</li>
@@ -169,7 +169,7 @@ export function AlfhollPage() {
           </h4>
           <p className="text-[var(--stone-gray)] leading-relaxed">
             Forstofa og stúdíóherbergi með góðu rúmi fyrir tvo (150×200) og
-            koju fyrir ofan sem rúmar 2-2. Eldhúshorn með tveimur eldavélahellum,
+            koju fyrir ofan sem rúmar 2-3. Eldhúshorn með tveimur eldavélahellum,
             ísskáp og vaski. Borðbúnaður fyrir 6. Salerni og handlaug. Í húsinu eru
             4 sængur og 4 koddar. Einungis er kalt vatn í húsinu enn sem komið er.
           </p>
@@ -240,7 +240,7 @@ export function AlfhollPage() {
             Álfhóll er sameign okkar djúpmanna. Leigutaki ber ábyrgð á húsinu
             og öllu sem þar er meðan á dvöl stendur. Verði um skemmdir að
             ræða skal tilkynna umsjónarmanni það strax. Göngum vel um húsið og
-            umhverfið — gróður og allt — og skiljum við það eins og við viljum
+            umhverfið, gróður og skiljum við það eins og við viljum
             sjálf taka við því.
           </p>
         </div>
@@ -312,7 +312,7 @@ export function AlfhollPage() {
             />
           </div>
           <p className="text-[var(--stone-gray)] leading-relaxed text-lg">
-            Við Álfhól hefur verið lagður göngustígur upp á Taglið á Bolafjalli.
+            Við Álfhól hefur verið lagður göngustígur upp á Taglið á Botnsfjalli.
             Fylgjið rauðum stikum sem hafa verið lagðar, leiðin er um 800m.
             Stígurinn býður upp á fallega leið og er
             tilvalin leið fyrir stuttar gönguferðir í náttúrunni.
